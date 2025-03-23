@@ -65,9 +65,6 @@ GLFWbool _glfwSelectPlatform(int desiredID, _GLFWplatform* platform)
 
     if (desiredID != GLFW_ANY_PLATFORM &&
         desiredID != GLFW_PLATFORM_WIN32 &&
-        desiredID != GLFW_PLATFORM_COCOA &&
-        desiredID != GLFW_PLATFORM_WAYLAND &&
-        desiredID != GLFW_PLATFORM_X11 &&
         desiredID != GLFW_PLATFORM_NULL)
     {
         _glfwInputError(GLFW_INVALID_ENUM, "Invalid platform ID 0x%08X", desiredID);
@@ -75,9 +72,7 @@ GLFWbool _glfwSelectPlatform(int desiredID, _GLFWplatform* platform)
     }
 
     // Only allow the Null platform if specifically requested
-    if (desiredID == GLFW_PLATFORM_NULL)
-        return _glfwConnectNull(desiredID, platform);
-    else if (count == 0)
+    if (count == 0)
     {
         _glfwInputError(GLFW_PLATFORM_UNAVAILABLE, "This binary only supports the Null platform");
         return GLFW_FALSE;
